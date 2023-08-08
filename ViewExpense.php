@@ -94,7 +94,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
 
                       require("DB/dbconn.php");
 
-                      $query = "SELECT * FROM expense order by Expense_Id DESC";
+                      $query = "SELECT * FROM expense where User_Id='$User_Id' order by Expense_Id DESC";
 
                       mysqli_query($conn, "set names utf8");
 

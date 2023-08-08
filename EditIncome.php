@@ -155,7 +155,7 @@ $Payment_Method = $row['Payment_Method'];
                           <option value="" selected="selected"><?php echo $Income_Category; ?></option>
                           <?php    
 
-                          $queryNews= "SELECT * FROM income_category ORDER BY IncomeCat_Id ASC"; 
+                          $queryNews= "SELECT * FROM income_category where User_Id='$User_Id' ORDER BY IncomeCat_Id ASC"; 
                           $resultNews = mysqli_query($conn, $queryNews);
 
 

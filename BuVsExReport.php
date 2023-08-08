@@ -9,11 +9,11 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
   $First_Name=$_SESSION['First_Name'];
   $Last_Name=$_SESSION['Last_Name'];
 
- $exp_category_dc = mysqli_query($conn, "SELECT Expense_Category FROM expense GROUP BY Expense_Category");
-  $exp_amt_dc = mysqli_query($conn, "SELECT SUM(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as SAmount FROM expense  GROUP BY Expense_Category");
+ $exp_category_dc = mysqli_query($conn, "SELECT Expense_Category FROM expense where User_Id='$User_Id' GROUP BY Expense_Category");
+  $exp_amt_dc = mysqli_query($conn, "SELECT SUM(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as SAmount FROM expense where User_Id='$User_Id'  GROUP BY Expense_Category");
 
-  $exp_date_line = mysqli_query($conn, "SELECT Date FROM expense GROUP BY Date");
-  $exp_amt_line = mysqli_query($conn, "SELECT SUM(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as DAmount FROM expense GROUP BY Date");
+  $exp_date_line = mysqli_query($conn, "SELECT Date FROM expense where User_Id='$User_Id' GROUP BY Date");
+  $exp_amt_line = mysqli_query($conn, "SELECT SUM(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as DAmount FROM expense where User_Id='$User_Id' GROUP BY Date");
 
 ?>
 <!DOCTYPE html>
@@ -68,28 +68,28 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
       </div>
     </section> -->
 <?php 
-$query = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount1 FROM income";
+$query = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount1 FROM income where User_Id='$User_Id'";
 
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result); 
 $Income = $row['sumAmount1'];
 
-$query2 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount2 FROM expense";
+$query2 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount2 FROM expense where User_Id='$User_Id'";
 $result2 = mysqli_query($conn, $query2);
 $row2 = mysqli_fetch_assoc($result2);
 $Expense = $row2['sumAmount2'];
 
-$query3 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount3 FROM budget";
+$query3 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount3 FROM budget where User_Id='$User_Id'";
 $result3 = mysqli_query($conn, $query3);
 $row3 = mysqli_fetch_assoc($result3);
 $Budget = $row3['sumAmount3'];
 
-$query5 = "SELECT sum(REPLACE(REPLACE(budget.Amount, '$', ''), ',', '')) as bAmount, sum(REPLACE(REPLACE(expense.Amount, '$', ''), ',', '')) As EAmount From budget inner join expense on budget.Budget_Item = expense.Expense_Category"; 
+$query5 = "SELECT sum(REPLACE(REPLACE(b.Amount, '$', ''), ',', '')) as bAmount, sum(REPLACE(REPLACE(e.Amount, '$', ''), ',', '')) As EAmount From budget b inner join expense e on b.Budget_Item = e.Expense_Category where b.User_Id='$User_Id' AND e.User_Id='$User_Id'"; 
 $result5 = mysqli_query($conn, $query5);  
 $row5 = mysqli_fetch_assoc($result5);
 $bAmount = $row5['bAmount'];
 $EAmount = $row5['EAmount'];
-
+$saved = $row5['bAmount'] - $row5['EAmount'];
 ?>
     <!-- Main content -->
     <section class="content">
@@ -197,17 +197,18 @@ $EAmount = $row5['EAmount'];
                   <tbody>
 <?php 
 //Budget and expense calculation
-$query4 = "SELECT DISTINCT Budget_Item, REPLACE(REPLACE(budget.Amount, '$', ''), ',', '') as bAmount, REPLACE(REPLACE(expense.Amount, '$', ''), ',', '') As EAmount From budget inner join expense on budget.Budget_Item = expense.Expense_Category"; 
+$query4 = "SELECT DISTINCT Budget_Item, REPLACE(REPLACE(b.Amount, '$', ''), ',', '') as bAmount, REPLACE(REPLACE(e.Amount, '$', ''), ',', '') As EAmount From budget b inner join expense e on b.Budget_Item = e.Expense_Category where b.User_Id='$User_Id' AND e.User_Id='$User_Id'"; 
+
 $result4 = mysqli_query($conn, $query4);
 $no=1; 
-$EAmount1=0; 
+
 while($row4 = mysqli_fetch_assoc($result4)){
 
 $Budget_Item = $row4['Budget_Item'];
 $bAmount = $row4['bAmount'];
 $EAmount = $row4['EAmount'];
 
-$saved = $row5['bAmount'] - $row5['EAmount'];
+
 
  
 ?>

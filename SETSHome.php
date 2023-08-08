@@ -79,24 +79,24 @@
 <?php 
 require("DB/dbconn.php");
 
-$query = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount1 FROM income where MONTH(Date)=MONTH(now())";
+$query = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount1 FROM income where MONTH(Date)=MONTH(now()) AND User_Id=$User_Id";
 
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result); 
 $MonthIncome = $row['sumAmount1'];
 
-$query1 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount2 from income where YEAR(Date)=YEAR(now())" ;
+$query1 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount2 from income where YEAR(Date)=YEAR(now()) AND User_Id=$User_Id" ;
 
 $result1 = mysqli_query($conn, $query1);
 $row1 = mysqli_fetch_assoc($result1); 
 $YearIncome = $row1['sumAmount2'];
 
-$query2 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount3 FROM expense where MONTH(Date)=MONTH(now())";
+$query2 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount3 FROM expense where MONTH(Date)=MONTH(now()) AND User_Id=$User_Id";
 $result2 = mysqli_query($conn, $query2);
 $row2 = mysqli_fetch_assoc($result2);
 $MonthExpense = $row2['sumAmount3'];
 
-$query3 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount4 from expense where YEAR(Date)=YEAR(now())" ;
+$query3 = "SELECT sum(REPLACE(REPLACE(Amount, '$', ''), ',', '')) as sumAmount4 from expense where YEAR(Date)=YEAR(now()) AND User_Id=$User_Id" ;
 $result3 = mysqli_query($conn, $query3);
 $row3 = mysqli_fetch_assoc($result3);
 $YearExpense = $row3['sumAmount4'];
@@ -207,7 +207,7 @@ $YearExpense = $row3['sumAmount4'];
                       require("DB/dbconn.php");
                       // $query = "select * from sales where MONTH(order_date)=MONTH(now())and YEAR(order_date)=YEAR(now())";
 
-                       $query = "SELECT * FROM expense where MONTH(Date)=MONTH(now())  order by Expense_Id DESC";
+                       $query = "SELECT * FROM expense where MONTH(Date)=MONTH(now()) AND User_Id=$User_Id  order by Expense_Id DESC";
 
                       mysqli_query($conn, "set names utf8");
 

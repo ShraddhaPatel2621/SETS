@@ -1,6 +1,9 @@
 <?php
 require("DB/dbconn.php");
+session_start();
 
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['user'] == 'user'){
+$User_Id=$_SESSION['User_Id'];
 ## Read value
 $draw = $_POST['draw'];
 $row = $_POST['start'];
@@ -11,23 +14,23 @@ $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
 $searchValue = mysqli_real_escape_string($conn,$_POST['search']['value']); // Search value
 
 ## Date search value
-$searchByFromdate = mysqli_real_escape_string($conn,$_POST['searchByFromdate']);
-$searchByTodate = mysqli_real_escape_string($conn,$_POST['searchByTodate']);
-## Search Query
-$searchQuery = array();
-if($searchValue != ''){
-     $searchQuery[] = "(Income_Category like '%".$searchValue."%' or Amount like '%".$searchValue."%' or Payment_Method like '%".$searchValue."%')";
-}
+// $searchByFromdate = mysqli_real_escape_string($conn,$_POST['searchByFromdate']);
+// $searchByTodate = mysqli_real_escape_string($conn,$_POST['searchByTodate']);
 
-// Date filter
-if($searchByFromdate != '' && $searchByTodate != ''){
-     $searchQuery[] = "(Date between '".$searchByFromdate."' and '".$searchByTodate."')";
-}
+// $searchQuery = array();
+// if($searchValue != ''){
+//      $searchQuery[] = "(Income_Category like '%".$searchValue."%' or Amount like '%".$searchValue."%' or Payment_Method like '%".$searchValue."%')";
+// }
 
-$WHERE = "";
-if(count($searchQuery) > 0){
-     $WHERE = " WHERE ".implode(' and ',$searchQuery);
-}
+// // Date filter
+// if($searchByFromdate != '' && $searchByTodate != ''){
+//      $searchQuery[] = "(Date between '".$searchByFromdate."' and '".$searchByTodate."')";
+// }
+
+// $WHERE = "";
+// if(count($searchQuery) > 0){
+//      $WHERE = " WHERE ".implode(' and ',$searchQuery);
+// }
 
 ## Total number of records without filtering
 $sel = mysqli_query($conn,"select count(*) as allcount from income");
@@ -35,12 +38,12 @@ $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 ## Total number of records with filtering
-$sel = mysqli_query($conn,"select count(*) as allcount from income ".$WHERE);
+$sel = mysqli_query($conn,"select count(*) as allcount from income ");
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-$empQuery = "select * from income ".$WHERE." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+$empQuery = "select * from income where User_Id='$User_Id' order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
 $empRecords = mysqli_query($conn, $empQuery);
 $data = array();
 
@@ -64,3 +67,5 @@ $response = array(
 
 echo json_encode($response);
 die;
+}
+?>

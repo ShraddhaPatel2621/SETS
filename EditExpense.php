@@ -159,7 +159,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
                           <option value="" selected="selected" disabled><?php echo $ExpenseCategory_Type; ?></option>
                           <?php    
 
-                          $queryNews= "SELECT DISTINCT ExpenseCategory_Type FROM expense_category ORDER BY ExpenseCat_Id ASC"; 
+                          $queryNews= "SELECT DISTINCT ExpenseCategory_Type FROM expense_category where User_Id='$User_Id' ORDER BY ExpenseCat_Id ASC"; 
                           $resultNews = mysqli_query($conn, $queryNews);
 
 

@@ -87,6 +87,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
                 <h3 class="card-title">Search Income data by Date Range</h3>
               </div>
               <div class="row" style="padding: 20px">
+                <input type='hidden' name='User_Id' id="User_Id" value='<?php echo $User_Id; ?>'>
                 <!-- <div class="input-daterange"> -->
                   <div class="col-md-4">
                       <label>Start Date</label>
@@ -214,7 +215,7 @@ $(document).ready(function(){
           // Read values
           var from_date = $('#search_fromdate').val();
           var to_date = $('#search_todate').val();
-
+          var User_Id = $('#User_Id').val();
           // Append to data
           data.searchByFromdate = from_date;
           data.searchByTodate = to_date;

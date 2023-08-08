@@ -108,7 +108,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
                           <option value="" selected="selected">-- Select --</option>
                           <?php    
 
-                          $queryNews= "SELECT * FROM income_category ORDER BY IncomeCat_Id ASC"; 
+                          $queryNews= "SELECT * FROM income_category where User_Id='$User_Id' ORDER BY IncomeCat_Id ASC"; 
                           $resultNews = mysqli_query($conn, $queryNews);
 
 

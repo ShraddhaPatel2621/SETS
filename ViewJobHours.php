@@ -92,7 +92,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
 
                       require("DB/dbconn.php");
 
-                      $query = "SELECT * FROM JobHours order by JobHours_Id DESC";
+                      $query = "SELECT * FROM JobHours where User_Id='$User_Id' order by JobHours_Id DESC";
 
                       mysqli_query($conn, "set names utf8");
 
