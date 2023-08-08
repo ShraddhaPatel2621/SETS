@@ -152,7 +152,7 @@ $Payment_Method = $row['Payment_Method'];
                   <div class="form-group">
                         <label>Select Income Category</label>
                         <select class="form-control" name="Income_Category" required>
-                          <option value="" selected="selected"><?php echo $Income_Category; ?></option>
+                          <option value="<?php echo $Income_Category; ?>" selected="selected" ><?php echo $Income_Category; ?></option>
                           <?php    
 
                           $queryNews= "SELECT * FROM income_category where User_Id='$User_Id' ORDER BY IncomeCat_Id ASC"; 
@@ -175,7 +175,7 @@ $Payment_Method = $row['Payment_Method'];
                       <div class="form-group">
                         <label>Select Payment Method</label>
                         <select class="form-control" name="Payment_Method" id="Payment_Method">
-                          <option value="" selected="selected" disabled><?php echo $Payment_Method; ?></option>
+                          <option value="<?php echo $Payment_Method; ?>" selected="selected" ><?php echo $Payment_Method; ?></option>
                           <option>Cash</option>
                           <!-- <option>Credit</option> -->
                           <option>Debit</option>

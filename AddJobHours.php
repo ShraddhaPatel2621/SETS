@@ -126,7 +126,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
                         </div> -->
                         <!-- /.card-header -->
                         <div class="card-body">
-                          <textarea id="summernote">Place <em>some</em> <u>text</u> <strong>here</strong></textarea>
+                          <textarea id="summernote" name="summernote">Place <em>some</em> <u>text</u> <strong>here</strong></textarea>
                         </div>
                       </div> 
                 </div>

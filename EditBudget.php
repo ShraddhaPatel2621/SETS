@@ -154,9 +154,9 @@ $Date = $row['Date'];
                       <div class="card-body">
                       <!-- select -->
                       <div class="form-group">
-                        <label>Select Expense Category Type</label>
+                        <label>Select Budget Category Type</label>
                         <select class="form-control" name="BudgetCat_Type" id="BudgetCat_Type">
-                          <option value="" selected="selected" disabled><?php echo $BudgetCat_Type; ?></option>
+                          <option value="<?php echo $BudgetCat_Type; ?>" selected="selected" ><?php echo $BudgetCat_Type; ?></option>
                           <?php    
 
                           $queryNews= "SELECT DISTINCT ExpenseCategory_Type FROM expense_category where User_Id='$User_Id' ORDER BY ExpenseCat_Id ASC"; 
@@ -172,9 +172,9 @@ $Date = $row['Date'];
                       </div>
                       <!-- select -->
                       <div class="form-group">
-                        <label>Select Expense Category</label>
+                        <label>Select Budget Item</label>
                         <select class="form-control" name="Budget_Item" id="Budget_Item">
-                          <option value="" selected="selected"><?php echo $Budget_Item; ?></option>
+                          <option value="<?php echo $Budget_Item; ?>" selected="selected"><?php echo $Budget_Item; ?></option>
                           
                         </select>
                       </div>

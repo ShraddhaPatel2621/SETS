@@ -7,7 +7,7 @@ session_start();
         // your database connection code
 
         $ExpenseCategory_Type = $_POST['ExpenseCategory_Type'];
-        $sql = "SELECT * FROM expense_category WHERE ExpenseCategory_Type = '$ExpenseCategory_Type'  AND User_Id='User_Id'";
+        $sql = "SELECT * FROM expense_category WHERE ExpenseCategory_Type = '$ExpenseCategory_Type'  AND User_Id='$User_Id'";
         $result = mysqli_query($conn, $sql);
         echo "<option value=''  selected='selected' disabled>------selected--------</option>";
         while($row = mysqli_fetch_array($result)){

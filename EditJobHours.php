@@ -96,7 +96,9 @@ $row = mysqli_fetch_assoc($result);
 $JobHours_Id = $row['JobHours_Id'];
 $Company_Name = $row['Company_Name'];
 $startTime = $row['startTime'];
+$startTime1 = date( 'mm-dd-YY H:i:s', $startTime );
 $endTime = $row['endTime'];
+$endTime1 = date( 'mm-dd-YY H:i:s', $endTime );
 $totalHour = $row['totalHour'];
 $Description = $row['Description'];
 
@@ -155,11 +157,11 @@ $Description = $row['Description'];
                       </div>
                       <div class="form-group">
                          <label for="Date">Start Date Time</label>
-                           <input type="datetime-local" name="startTime" class="form-control" id="startTime" placeholder="Select Start DateTime" value='<?php echo $startTime; ?>'>
+                           <input type="datetime-local" name="startTime" class="form-control" id="startTime" placeholder="Select Start DateTime" value='<?php echo $startTime1; ?>'>
                       </div>
                       <div class="form-group">
                          <label for="datetime">End Date Time</label>
-                           <input type="datetime-local" name="endTime" class="form-control" id="endTime" placeholder="Select End Date Time" value='<?php echo $endTime; ?>'>
+                           <input type="datetime-local" name="endTime" class="form-control" id="endTime" placeholder="Select End Date Time" value='<?php echo $endTime1; ?>'>
                       </div>
                       <div class="form-group">
                         <label for="Hours">Total Hours</label>

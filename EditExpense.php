@@ -155,8 +155,8 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
                       <!-- select -->
                       <div class="form-group">
                         <label>Select Expense Category Type</label>
-                        <select class="form-control" name="ExpenseCategory_Type" id="ExpenseCategory_Type">
-                          <option value="" selected="selected" disabled><?php echo $ExpenseCategory_Type; ?></option>
+                        <select class="form-control" name="ExpenseCategory_Type" id="ExpenseCategory_Type" >
+                          <option value="<?php echo $ExpenseCategory_Type; ?>" selected="selected" ><?php echo $ExpenseCategory_Type; ?></option>
                           <?php    
 
                           $queryNews= "SELECT DISTINCT ExpenseCategory_Type FROM expense_category where User_Id='$User_Id' ORDER BY ExpenseCat_Id ASC"; 
@@ -174,7 +174,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
                       <div class="form-group">
                         <label>Select Expense Category</label>
                         <select class="form-control" name="Expense_Category" id="Expense_Category">
-                          <option value="" selected="selected"><?php echo $Expense_Category; ?></option>
+                          <option value="<?php echo $Expense_Category; ?>" selected="selected" ><?php echo $Expense_Category; ?></option>
                           
                         </select>
                       </div>
@@ -182,7 +182,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['u
                       <div class="form-group">
                         <label>Select Payment Method</label>
                         <select class="form-control" name="Payment_Method" id="Payment_Method">
-                          <option value="" selected="selected" disabled><?php echo $Payment_Method; ?></option>
+                          <option value="<?php echo $Payment_Method; ?>" selected="selected" ><?php echo $Payment_Method; ?></option>
                           <option>Cash</option>
                           <option>Credit</option>
                           <option>Debit</option>
